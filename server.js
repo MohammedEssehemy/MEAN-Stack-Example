@@ -1,4 +1,7 @@
 const express = require('express');
+// initaiate app
+const app = express();
+const server = require('http').createServer(app);
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -53,13 +56,13 @@ app.use('/api/users', users);
 app.use('/api/bookmarks', bookmarks);
 
 // frontend Router
-app.use('*', (req, res, next) => {
+app.use('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// port for the website
+// port for the server
 const port = process.env.PORT || 9242;
 // listen to the port and logging verifying msg
-app.listen(port, () => {
+server.listen(port, () => {
   console.log("server is listening on port: ", port);
 });

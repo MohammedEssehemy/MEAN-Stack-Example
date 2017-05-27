@@ -31,7 +31,7 @@ export class EsriComponent implements OnInit {
   bookmarks: Bookmark[];
   markerGroup: L.FeatureGroup;
   queryLayer: L.GeoJSON = L.geoJSON(null, {
-    pointToLayer: function (feature, latlng) {
+    pointToLayer: function(feature, latlng) {
       return L.circleMarker(latlng, {
         radius: 8,
         fillColor: "#ff7800",
@@ -164,7 +164,7 @@ export class EsriComponent implements OnInit {
     this.esriService.query(whereCondition, null, true, []).subscribe(Idsres => {
       this.queryIds = Idsres.objectIds;
       let count = this.queryIds.length;
-      this.getFeatures( 0, count);
+      this.getFeatures(0, count);
     })
     this.esriService.query(whereCondition, statisticQuery, true, []).subscribe(statisticsRes => {
       this.queryResult = [];
@@ -186,23 +186,23 @@ export class EsriComponent implements OnInit {
 
   };
   getFeatures(from, count) {
-    
-      this.esriService.query(null, null, false, this.queryIds.slice(from, from + 500)).subscribe(res => {
-        from += 500;
-        this.queryLayer.addData(res);
-        if (from < count) {
+
+    this.esriService.query(null, null, false, this.queryIds.slice(from, from + 500)).subscribe(res => {
+      from += 500;
+      this.queryLayer.addData(res);
+      if (from < count) {
         this.flashMessagesService.show(`${from} features loaded out of ${count}`, {
           cssClass: 'alert-warning', timeout: 7500
         })
         this.getFeatures(from, count);
       }
-      else{
+      else {
         this.flashMessagesService.show(`${count} features loaded out of ${count}`, {
           cssClass: 'alert-warning', timeout: 7500
         })
       }
-      })
-    }
+    })
+  }
 
   initializeMap(loggedIn) {
 
@@ -250,15 +250,15 @@ export class EsriComponent implements OnInit {
             this.map.on('click', this.mapclick_creatMarker.bind(this))
           }
         }, {
-          stateName: 'bookmark-state',
-          icon: 'fa fa-university fa-lg',
-          title: 'finish adding bookmark',
-          onClick: (btn, map) => {
-            this.map.off('click', this.mapclick_creatMarker.bind(this));
-            // this.map.on('click',e=>console.log(e))
-            btn.state('default-state');    // change state on click!
-          }
-        }]
+            stateName: 'bookmark-state',
+            icon: 'fa fa-university fa-lg',
+            title: 'finish adding bookmark',
+            onClick: (btn, map) => {
+              this.map.off('click', this.mapclick_creatMarker.bind(this));
+              // this.map.on('click',e=>console.log(e))
+              btn.state('default-state');    // change state on click!
+            }
+          }]
       });
       bookmarksButton.addTo(this.map);
     }

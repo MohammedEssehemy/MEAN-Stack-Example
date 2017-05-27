@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule, Routes} from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
@@ -28,6 +28,7 @@ import { BookmarksService } from "./services/bookmarks.service";
 import { UsersService } from "./services/users.service";
 import { UsersGuard } from "./guards/users.guard";
 import { EsriService } from "./services/esri.service";
+import { GoogleMapComponent } from './components/google-map/google-map.component';
 
 
 const appRoutes:Routes = [
@@ -38,6 +39,7 @@ const appRoutes:Routes = [
 {path:'contact',component:ContactComponent},
 {path:'map',component:MapComponent},
 {path:'esrimap',component:EsriComponent},
+{path:'googlemap',component:GoogleMapComponent},
 {path:'*',component: HomeComponent}
 ]
 @NgModule({
@@ -55,13 +57,15 @@ const appRoutes:Routes = [
     LoadingComponent,
     MapComponent,
     EsriComponent,
-    PopupComponent
+    PopupComponent,
+    GoogleMapComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    JsonpModule,
     FlashMessagesModule,
     RouterModule.forRoot(appRoutes)
   ],
