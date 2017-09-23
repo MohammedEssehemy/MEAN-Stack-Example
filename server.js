@@ -27,9 +27,6 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
   console.log('connection error: ' + err);
 });
-// initaiate app
-const app = express();
-
 
 //middlewares
 // cors middleware
